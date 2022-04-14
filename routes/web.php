@@ -21,6 +21,10 @@ Route::get('/about', function () {
     return view('about', compact('name'));
 });
 
-Route::get('/task/{id}',[TaskController::class,'show']);
-Route::post('/task/store',[TaskController::class,'store']);
+Route::get('/task/{id}',[TaskController::class,'show'])->name('task.show');
+Route::post('/task/store',[TaskController::class,'store'])->name('task.store');
 Route::delete('/task/destroy/{id}',[TaskController::class , 'destroy'])->name('task.destroy');
+Route::get('/task/update/{id}',[TaskController::class , 'update'])->name('task.update');
+Route::post('/task/update/{id}',[TaskController::class , 'update'])->name('task.update');
+Route::get('/task/edit/{id}',[TaskController::class , 'edit']) -> name('task.edit');
+Route::put('/task/edit/{id}',[TaskController::class , 'edit']) -> name('task.edit');

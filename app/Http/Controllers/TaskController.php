@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\DB;
 class TaskController extends Controller
 {
     public function index(){
+        $tasks = DB::table('tasks')->orderBy('name', 'asc')->get();
 
-        $tasks = DB::table('tasks')->get();
         return view('tasks.index', compact('tasks'));
 
 }
@@ -31,6 +31,20 @@ public function store (Request $req){
 public function destroy($id){
     $delete = DB::table('tasks')->where('id',$id)->delete();
     return redirect()->back();
+}
+
+public function update($id){
+
+    $tasks = DB::table('tasks')->orderBy('name', 'asc')->get();
+    $task= DB::table('tasks')->find($id);
+
+   return view('tasks.update' , compact('task','tasks'));
+}
+public function edit(Request $req){
+
+
+    $task = DB::table('tasks')->where('id',$req->id)->update(['name'=>$req->name]);
+    return redirect('/');
 }
 
 }
